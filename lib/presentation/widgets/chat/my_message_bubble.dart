@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class MyMessageBubble extends StatelessWidget {
   final String messageText;
 
-  MyMessageBubble({
+  const MyMessageBubble({
     Key? key,
     required this.messageText,
   }) : super(key: key);

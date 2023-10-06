@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:yes_no_app/domain/entities/message.dart';
 
 class HerMessageBubble extends StatelessWidget {
-  const HerMessageBubble({super.key});
+  final Message message;
+
+  const HerMessageBubble({
+    Key? key,
+    required this.message,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,18 +22,18 @@ class HerMessageBubble extends StatelessWidget {
               //y si pones SECONDARY toma el color global
               color: colors.secondary,
               borderRadius: BorderRadius.circular(20)),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Text(
-              'hola mundo',
-              style: TextStyle(color: Colors.white),
+              message.text,
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ),
         const SizedBox(
           height: 5,
         ),
-        _ImagenBubble(),
+        _ImagenBubble(message.imageUrl!),
         const SizedBox(
           height: 10,
         )
@@ -36,14 +42,19 @@ class HerMessageBubble extends StatelessWidget {
   }
 }
 
+//la clase par ala imagen
 class _ImagenBubble extends StatelessWidget {
+  final String imagenUrl;
+
+  const _ImagenBubble(this.imagenUrl);
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Image.network(
-        "https://assetsio.reedpopcdn.com/civil-war-still.jpg?width=1920&height=1920&fit=bounds&quality=80&format=jpg&auto=webp",
+        imagenUrl,
         width: size.width * 0.7,
         height: 150,
         fit: BoxFit.cover,
